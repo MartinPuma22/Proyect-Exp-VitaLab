@@ -1,0 +1,86 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<jasperReport xmlns="http://jasperreports.sourceforge.net/jasperreports"
+              xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+              xsi:schemaLocation="http://jasperreports.sourceforge.net/jasperreports
+              http://jasperreports.sourceforge.net/xsd/jasperreport.xsd"
+              name="reporte_cita" pageWidth="595" pageHeight="842"
+              columnWidth="555" leftMargin="20" rightMargin="20"
+              topMargin="20" bottomMargin="20">
+
+    <!-- Parámetro -->
+    <parameter name="createdBy" class="java.lang.String"/>
+
+    <!-- Campos principales -->
+    <field name="paciente" class="com.vitaLab.ClinicaOcupacional.model.Paciente"/>
+    <field name="doctor" class="com.vitaLab.ClinicaOcupacional.model.Doctor"/>
+    <field name="diagnostico" class="java.lang.String"/>
+    <field name="fecha" class="java.time.LocalDate"/>
+    <field name="hora" class="java.time.LocalTime"/>
+
+    <!-- Título -->
+    <title>
+        <band height="60">
+            <staticText>
+                <reportElement x="0" y="10" width="400" height="30"/>
+                <textElement textAlignment="Center">
+                    <font size="18" isBold="true"/>
+                </textElement>
+                <text><![CDATA[Reporte de Citas - Clínica VitaLab]]></text>
+            </staticText>
+        </band>
+    </title>
+
+    <!-- Encabezados -->
+    <columnHeader>
+        <band height="20">
+            <staticText><reportElement x="0" y="0" width="140" height="20"/><text><![CDATA[Paciente]]></text></staticText>
+            <staticText><reportElement x="150" y="0" width="120" height="20"/><text><![CDATA[Doctor]]></text></staticText>
+            <staticText><reportElement x="290" y="0" width="120" height="20"/><text><![CDATA[Diagnóstico]]></text></staticText>
+            <staticText><reportElement x="430" y="0" width="120" height="20"/><text><![CDATA[Fecha y Hora]]></text></staticText>
+        </band>
+    </columnHeader>
+
+    <!-- Detalle -->
+    <detail>
+        <band height="20">
+            <!-- Paciente -->
+            <textField>
+                <reportElement x="0" y="0" width="140" height="20"/>
+                <textFieldExpression><![CDATA[$F{paciente}.getNombre() + " " + $F{paciente}.getApellido()]]></textFieldExpression>
+            </textField>
+
+            <!-- Doctor -->
+            <textField>
+                <reportElement x="150" y="0" width="120" height="20"/>
+                <textFieldExpression><![CDATA[$F{doctor}.getNombre()]]></textFieldExpression>
+            </textField>
+
+            <!-- Diagnóstico -->
+            <textField>
+                <reportElement x="290" y="0" width="120" height="20"/>
+                <textFieldExpression><![CDATA[$F{diagnostico}]]></textFieldExpression>
+            </textField>
+
+            <!-- Fecha + Hora -->
+            <textField>
+                <reportElement x="430" y="0" width="120" height="20"/>
+                <textFieldExpression><![CDATA[$F{fecha}.toString() + " " + $F{hora}.toString()]]></textFieldExpression>
+            </textField>
+        </band>
+    </detail>
+
+    <!-- Pie de página -->
+    <pageFooter>
+        <band height="20">
+            <textField>
+                <reportElement x="0" y="0" width="555" height="20"/>
+                <textFieldExpression><![CDATA["Generado por: " + $P{createdBy}]]></textFieldExpression>
+            </textField>
+        </band>
+    </pageFooter>
+
+</jasperReport>
+
+
+
+

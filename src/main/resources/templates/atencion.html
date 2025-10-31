@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Nueva Atención - VitaLab</title>
+    <link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body class="bg-light">
+
+<div class="container mt-5">
+    <h2 class="text-center mb-4">🩺 Registrar Atención Médica</h2>
+
+    <div class="card p-4 shadow-lg">
+        <form th:action="@{/atenciones/guardar}" th:object="${atencion}" method="post">
+            <div class="mb-3">
+                <label class="form-label">Seleccionar Cita:</label>
+                <select class="form-select" th:field="*{cita}" required>
+                    <option th:each="cita : ${citas}" th:value="${cita}"
+                            th:text="${cita.paciente.nombre + ' - ' + cita.doctor.nombre}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Síntomas:</label>
+                <textarea class="form-control" th:field="*{sintomas}" rows="2" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Diagnóstico:</label>
+                <textarea class="form-control" th:field="*{diagnostico}" rows="2" required></textarea>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Tratamiento:</label>
+                <textarea class="form-control" th:field="*{tratamiento}" rows="2" required></textarea>
+            </div>
+
+            <div class="text-center">
+                <button class="btn btn-primary">💾 Guardar Atención</button>
+                <a th:href="@{/atenciones}" class="btn btn-secondary">⬅️ Volver</a>
+            </div>
+        </form>
+    </div>
+</div>
+
+<footer class="text-center mt-5 text-muted">
+    © 2025 VitaLab. Gestión Clínica Inteligente
+</footer>
+
+</body>
+</html>
